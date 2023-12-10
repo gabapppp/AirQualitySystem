@@ -85,7 +85,6 @@ def background_thread():
         Smoke_val = 0
         CO_val = 0
 
-
         # Defining constants
         r0 = 0.38
         ppm = .0
