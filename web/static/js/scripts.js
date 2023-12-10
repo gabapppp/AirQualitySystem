@@ -1,12 +1,12 @@
 const ctx1 = document.getElementById('chart1').getContext('2d');
-const percent_value = 554;
+const percent_value = 8;
 const chart = new Chart(ctx1, {
     type: 'doughnut',
     data: {
         labels: ['CO',],
         datasets: [{
             label: 'CO',
-            data: [percent_value, 1500 - percent_value],
+            data: [percent_value, 60 - percent_value],
             backgroundColor: ['#00baa6', '#ededed']
         }]
     },
@@ -48,14 +48,14 @@ const chart3 = new Chart(ctx3, {
 });
 
 const ctx4 = document.getElementById('chart4').getContext('2d');
-const percent_value4 = 40;
+const percent_value4 = 65;
 const chart4 = new Chart(ctx4, {
     type: 'doughnut',
     data: {
         labels: ['Humidity',],
         datasets: [{
             label: 'Humidity',
-            data: [percent_value, 200 - percent_value],
+            data: [percent_value, 100 - percent_value],
             backgroundColor: ['#f01e2c', '#ededed']
         }]
     },
