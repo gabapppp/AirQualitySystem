@@ -11,7 +11,27 @@ import Adafruit_ADS1x15
 import board
 import adafruit_ahtx0
 
+from luma.core.interface.serial import i2c
+from luma.core.render import canvas
+from luma.oled.device import ssd1306
+	
+# Define the font size and style
+from PIL import ImageFont
+font = ImageFont.load_default(16)
+
+# Initialize the I2C serial interface
+serial = i2c(port=1, address=0x3C)  # Use the correct I2C address (0x3C or 0x3D) for your OLED display
+device = ssd1306(serial, width=128, height=64)  # Set the width and height according to your display's specifications
+
 i2c = board.I2C()
+sensor = adafruit_ahtx0.AHTx0(i2c)
+# Create a function to display text on the OLED screen
+def display_text(text, text2, text3):
+    with canvas(device) as draw:
+        draw.text((10, 0), text, font=font, fill="white")
+        draw.text((10, 20), text2,font=font, fill="white")
+        draw.text((10, 40), text3, font=font, fill="white")
+         
 sensor = adafruit_ahtx0.AHTx0(i2c)
 
 dustPin = 3;
@@ -111,6 +131,7 @@ def background_thread():
         print("Dust Density Level (in ug/m^3): {:.5f}".format(dustLevel));
         print('CO value (Rs\Ro): {:.3f}'.format(ratio))
         print('Smoke value (in V): {:.3f}'.format(Smoke_val))
+        print('Smoke value: {:.3f}'.format(ppm))
         #socketio.emit('updateSensorData', {'pm25': dummy_sensor_value,'co': co_sensor_value,
         #'temp': temp_sensor_value,'humi': humi_sensor_value, "date": get_current_datetime()
         #})
@@ -121,7 +142,10 @@ def background_thread():
             "temperature": temperature,
             "humidity": humidity,
             "date": get_current_datetime()})
-        socketio.sleep(1)
+        display_text(f"MQ7: %0.2f" % ratio, f"MQ135: %0.2f" % ppm , f"PM-2.5: %0.5f" % dustLevel)
+        time.sleep(1)
+        display_text(f"Temp: %0.1f C" % temperature, f"Humi: %0.1f %%" % humidity, f"")
+        time.sleep(1)  # You can adjust the sampling interval
 
 @app.route("/")
 def index():
