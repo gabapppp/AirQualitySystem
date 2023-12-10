@@ -86,7 +86,6 @@ const chart5 = new Chart(ctx5, {
     },
 });
 
-
 const ctx6 = document.getElementById("chart6").getContext('2d');
 const chart6 = new Chart(ctx6, {
     type: 'line',

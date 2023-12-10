@@ -46,8 +46,8 @@
                 | CO: [Current CO Level] |
                 | NO2: [Current NO2 Level]
                 -->
-                <div class="container-fluid">
-                    <p>DATETIME: 25:59 09/12/2023</p>
+                <div class="container">
+                    <p class=" display-6 text-opacity-50">25:59 09/12/2023</p>
                 </div>
                 <div class="container-fluid" style="padding-bottom: 20px; max-width: 700px;">
                     <div class="row text-center">
@@ -70,24 +70,34 @@
                             <p>67 &percnt; </p>
                         </div>
                     </div>
+                    <div class="row">
+                        <p class="display-6">
+                            AQI: 56<br>
+
+                        </p>
+                        <div class="container border-1 border-info">
+                            Health or unhealthy
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
-
 
         </div>
         <div class="tab-pane fade" id="graph-tab-pane" role="tabpanel" aria-labelledby="graph-tab" tabindex="1">
-            <div class="row text-center">
-                <canvas id="chart5"></canvas>
+            <div class="container-fluid text-center">
+                <div class="row">
+                    <canvas id="chart5"></canvas>
+                </div>
+                <div class="row">
+                    <canvas id="chart6"></canvas>
+                </div>
             </div>
             <div class="row">
-                <canvas id="chart6"></canvas>
+                <p>Start </p>
+                <p>End </p>
             </div>
         </div>
-        <div class="row">
 
-        </div>
     </div>
     </div>
 
