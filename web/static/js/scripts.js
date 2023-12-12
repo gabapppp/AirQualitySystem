@@ -1,3 +1,15 @@
+import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
+
+const socket = io();
+
+var dt = new Date().getTime(),
+    cnt = 0,
+    useShift = true,
+    INTERVAL_ID;
+
+const dateElement = document.getElementById("date")
+var currentDate = new Date()
+dateElement.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + " " + currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear()
 var chart = JSC.chart('chartTemp', {
     debug: true,
     title: {
@@ -149,9 +161,9 @@ var chart3 = JSC.chart('chartCO', {
         {
             pointValue: '{%value/80}',
             palette: {
-                colors: ['#77e6b4']
+                colors: ['#EE6352', '#FFE853', '#AAF78B']
             },
-            points: [['value', 68]]
+            points: [['value', 78]]
         }
     ]
 });
@@ -271,28 +283,27 @@ var chart6 = JSC.chart('graphTempHum', {
     },
     yAxis: {
         orientation: 'opposite',
-        formatString: 'c'
     },
     defaultSeries: {
         firstPoint_label_text: '<b>%seriesName</b>',
         defaultPoint_marker: {
             type: 'circle',
-            size: 8,
+            size: 4,
             fill: 'white',
             outline: { width: 2, color: 'currentColor' }
         }
     },
-    title_label_text: 'Costs (Last 6 Months)',
+    title_label_text: 'Temperature and Humidity (Last Hour)',
     series: [
         {
             name: 'Temperature',
             points: [
                 ['1/1/2020', 29.9],
-                ['2/1/2020', 97.5],
-                ['3/1/2020', 110.4],
-                ['4/1/2020', 129.2],
-                ['5/1/2020', 144.0],
-                ['6/1/2020', 176.0]
+                ['2/1/2020', 30.5],
+                ['3/1/2020', 31.4],
+                ['4/1/2020', 29.2],
+                ['5/1/2020', 30.0],
+                ['6/1/2020', 27.0]
             ]
         },
         {
@@ -318,19 +329,18 @@ var chart7 = JSC.chart('graphDust', {
         scale: { type: 'time' }
     },
     yAxis: {
-        orientation: 'opposite',
-        formatString: 'c'
+        orientation: 'opposite'
     },
     defaultSeries: {
         firstPoint_label_text: '<b>%seriesName</b>',
         defaultPoint_marker: {
             type: 'circle',
-            size: 8,
+            size: 4,
             fill: 'white',
             outline: { width: 2, color: 'currentColor' }
         }
     },
-    title_label_text: 'Costs (Last 6 Months)',
+    title_label_text: 'Gas and PM 2.5 sensors (Last Hour)',
     series: [
         {
             name: 'CO',
@@ -367,3 +377,7 @@ var chart7 = JSC.chart('graphDust', {
         }
     ]
 });
+
+/**
+ *  Adds a data point to the chart series.
+ */
