@@ -16,7 +16,7 @@
     <script src="https://code.jscharting.com/latest/jscharting.js"></script>
     <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
-    <script type="module" src="../static/js/scripts.js"></script>
+    <script type="module" src="{{ url_for('static', filename='js/script.js')}}"></script>
 </head>
 
 <body>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--
                     <div class="row">
                         <p class="display-6">
                             AQI: 56<br>
@@ -85,6 +85,7 @@
                             Health or unhealthy
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
             <div class="tab-pane fade" id="graph-tab-pane" role="tabpanel" aria-labelledby="graph-tab" tabindex="0">

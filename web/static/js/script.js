@@ -1,16 +1,29 @@
 import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
 
-const socket = io();
-
 var dt = new Date().getTime(),
-    cnt = 0,
-    useShift = true,
     INTERVAL_ID;
+
+var dust, co, co2, temp, humi;
+const socket = io();
+socket.on("connect", () => {
+    socket.on("updateSensorData", (value) => {
+        if (value) {
+            const { pm25, mq7, mq135, temperature, humidity } = value;
+            dust = pm25;
+            co = mq7;
+            co2 = mq135;
+            temp = temperature;
+            humi = humidity;
+        };
+    });
+});
+
 
 const dateElement = document.getElementById("date")
 var currentDate = new Date()
 dateElement.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes() + " " + currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear()
-var chart = JSC.chart('chartTemp', {
+
+var chart1 = JSC.chart('chartTemp', {
     debug: true,
     title: {
         label_text: 'Temperature',
@@ -49,10 +62,10 @@ var chart = JSC.chart('chartTemp', {
             palette: {
                 colors: ['#77e6b4']
             },
-            points: [['value', 29]]
+            points: [['value', 29.1]]
         }
     ]
-});
+}, start);
 
 var chart2 = JSC.chart('chartHum', {
     debug: true,
@@ -61,26 +74,12 @@ var chart2 = JSC.chart('chartHum', {
         position: 'center'
     },
     legend_visible: false,
-    defaultTooltip_enabled: false,
     xAxis_spacingPercentage: 0.4,
     yAxis: [
         {
             line_width: 0,
             defaultTick_enabled: false,
             scale_range: [0, 100]
-        },
-        {
-            id: 'ax2',
-            scale_range: [0, 100],
-            defaultTick: {
-                padding: 10,
-                enabled: false
-            },
-            customTicks: [0, 30, 60, 70, 80, 100],
-            line: {
-                width: 10,
-                color: 'smartPalette:pal2'
-            }
         }
     ],
     xAxis: [
@@ -105,7 +104,6 @@ var chart2 = JSC.chart('chartHum', {
     series: [
         {
             palette: {
-                id: 'pal2',
                 pointValue: '{%value/100}',
                 colors: [
                     '#ffffd9',
@@ -122,7 +120,7 @@ var chart2 = JSC.chart('chartHum', {
             points: [['value', 71]]
         }
     ]
-});
+}, start);
 
 var chart3 = JSC.chart('chartCO', {
     debug: true,
@@ -210,7 +208,7 @@ var chart4 = JSC.chart('chartCO2', {
             points: [['value', 398]]
         }
     ]
-});
+}, start);
 
 var chart5 = JSC.chart('chartDust', {
     debug: true,
@@ -376,8 +374,38 @@ var chart7 = JSC.chart('graphDust', {
             ]
         }
     ]
-});
+}, start);
 
 /**
  *  Adds a data point to the chart series.
  */
+
+function addData() {
+    chart1
+        .series(0).options({
+            points: [['value', temp]]
+        })
+    chart2
+        .series().options({
+            points: [['value', humi]]
+        })
+    chart3
+        .series(0).options({
+            points: [['value', co]]
+        })
+    chart4
+        .series(0).options({
+            points: [['value', co2]]
+        })
+    chart5
+        .series(0).options({
+            points: [['value', dust]]
+        })
+};
+
+function start() {
+    INTERVAL_ID = setInterval(function () {
+        if (temp != undefined && humi != undefined && co != undefined && co2 != undefined && dust != undefined)
+            addData()
+    }, 1000);
+}
