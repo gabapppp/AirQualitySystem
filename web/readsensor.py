@@ -74,12 +74,6 @@ def display_text(text, text2, text3):
 #  -  16 = +/-0.256V
 # See table 3 in the ADS1015/ADS1115 datasheet for more info on gain.
 GAIN = 1
-"""
-Get current date time
-"""
-def get_current_datetime():
-    now = datetime.now()
-    return now.strftime("%m/%d/%Y %H:%M:%S")
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -141,7 +135,7 @@ try:
             "mq135": CO2_ppm,
             "temperature": temperature,
             "humidity": humidity,
-            "time": get_current_datetime()
+            "time": datetime.utcnow()
             }
             db.sensordata.insert_one(data);
 

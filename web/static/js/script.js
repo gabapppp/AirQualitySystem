@@ -257,124 +257,19 @@ var chart5 = JSC.chart('chartDust', {
 function getPoints(i) {
     var extraY = i * 20;
     var points = [
-        { x: "1/1/2020", y: 65 },
-        { x: "2/1/2020", y: 67 },
-        { x: "3/1/2020", y: 72 },
-        { x: "4/1/2020", y: 66 },
-        { x: "5/1/2020", y: 84 },
-        { x: "6/1/2020", y: 74 },
-        { x: "7/1/2020", y: 72 },
-        { x: "8/1/2020", y: 84 }
+        { x: "21/12/2023", y: 65 },
+        { x: "22/12/2023", y: 67 },
+        { x: "23/12/2023", y: 72 },
+        { x: "24/12/2023", y: 66 },
+        { x: "25/12/2023", y: 84 },
+        { x: "26/12/2023", y: 74 },
+        { x: "27/12/2023", y: 72 },
+        { x: "28/12/2023", y: 84 }
     ];
     return points.map(function (p) {
         return { x: p.x, y: p.y + extraY };
     });
 };
-
-var chart6 = JSC.chart('graphTempHum', {
-    debug: true,
-    type: 'line',
-    legend_visible: false,
-    xAxis: {
-        crosshair_enabled: true,
-        scale: { type: 'time' }
-    },
-    yAxis: {
-        orientation: 'opposite',
-    },
-    defaultSeries: {
-        firstPoint_label_text: '<b>%seriesName</b>',
-        defaultPoint_marker: {
-            type: 'circle',
-            size: 4,
-            fill: 'white',
-            outline: { width: 2, color: 'currentColor' }
-        }
-    },
-    title_label_text: 'Temperature and Humidity (Last Hour)',
-    series: [
-        {
-            name: 'Temperature',
-            points: [
-                ['1/1/2020', 29.9],
-                ['2/1/2020', 30.5],
-                ['3/1/2020', 31.4],
-                ['4/1/2020', 29.2],
-                ['5/1/2020', 30.0],
-                ['6/1/2020', 27.0]
-            ]
-        },
-        {
-            name: 'Humidity',
-            points: [
-                ['1/1/2020', 86.9],
-                ['2/1/2020', 79.5],
-                ['3/1/2020', 65.4],
-                ['4/1/2020', 67.2],
-                ['5/1/2020', 73.0],
-                ['6/1/2020', 76.0]
-            ]
-        }
-    ]
-});
-
-var chart7 = JSC.chart('graphDust', {
-    debug: true,
-    type: 'line',
-    legend_visible: false,
-    xAxis: {
-        crosshair_enabled: true,
-        scale: { type: 'time' }
-    },
-    yAxis: {
-        orientation: 'opposite'
-    },
-    defaultSeries: {
-        firstPoint_label_text: '<b>%seriesName</b>',
-        defaultPoint_marker: {
-            type: 'circle',
-            size: 4,
-            fill: 'white',
-            outline: { width: 2, color: 'currentColor' }
-        }
-    },
-    title_label_text: 'Gas and PM 2.5 sensors (Last Hour)',
-    series: [
-        {
-            name: 'CO',
-            points: [
-                ['1/1/2020', 200.9],
-                ['2/1/2020', 130.5],
-                ['3/1/2020', 100.4],
-                ['4/1/2020', 120.2],
-                ['5/1/2020', 140.0],
-                ['6/1/2020', 160.0]
-            ]
-        },
-        {
-            name: 'Pollution Gas',
-            points: [
-                ['1/1/2020', 400.9],
-                ['2/1/2020', 200.5],
-                ['3/1/2020', 300.4],
-                ['4/1/2020', 360.2],
-                ['5/1/2020', 330.0],
-                ['6/1/2020', 410.0]
-            ]
-        },
-        {
-            name: 'PM 2.5',
-            points: [
-                ['1/1/2020', 12.9],
-                ['2/1/2020', 11.5],
-                ['3/1/2020', 9.4],
-                ['4/1/2020', 10.2],
-                ['5/1/2020', 17.0],
-                ['6/1/2020', 15.0]
-            ]
-        }
-    ]
-}, start);
 
 /**
  *  Adds a data point to the chart series.
@@ -409,3 +304,4 @@ function start() {
             addData()
     }, 1000);
 }
+
